@@ -52,9 +52,10 @@ app.get('/read-java-files', async (req, res) => {
             console.log("METHODS:");
             getMethods(fileMap[key]).forEach(function (method) {
                 process.stdout.write(method.accessModifier +" "+ method.name +"(");
-                method.parameters.forEach(function (parameter) {
-                    process.stdout.write(parameter.name+":"+ parameter.type);
-                })
+                for (let i = 0; i < method.parameters.length; i++) {
+                    process.stdout.write(method.parameters[i].name+":"+ method.parameters[i].type);
+                    if(i+1 !== method.parameters.length)process.stdout.write(" , ");
+                }
                 process.stdout.write(") : "+ method.type );
                 console.log()
             });
